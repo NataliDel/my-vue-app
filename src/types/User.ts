@@ -12,5 +12,5 @@ export type User = {
   address: string;
   phone: string;
   web: string;
-  dob: Date;
+  dob: string;
 };

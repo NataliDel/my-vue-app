@@ -4,6 +4,9 @@ import Root from "./routes/Root";
 import Overview from "./routes/overview/Overview";
 import CreateView from "./routes/create/CreateView";
 import EditView from "./routes/edit/EditView";
+import { useReducer } from "react";
+import userManagementReducer from "./Hooks/userManagementReducer";
+import { UserContext } from "./context/UserContext";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +21,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  const [users, usersDispatch] = useReducer(userManagementReducer, []);
+  console.log(users);
+  return (
+    <UserContext.Provider value={{ users, usersDispatch }}>
+      <RouterProvider router={router} />;
+    </UserContext.Provider>
+  );
 }
 
 export default App;
