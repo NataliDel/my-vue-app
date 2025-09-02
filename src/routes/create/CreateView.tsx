@@ -29,23 +29,49 @@ function CreateView() {
       case "Divers":
         return Gender.OTHER;
       default:
-        return Gender.OTHER;
+        return Gender.NONE;
     }
   }
-  function handleSubmitNewUser() {
-    const user: User = {
-      id: Math.random(),
-      name: userNameProps.value,
-      dob: dobProps.value,
-      gender: convertStringToGender(genderProps.value),
-      email: emailProps.value,
-      address: addressProps.value,
-      phone: telephoneProps.value,
-      web: websiteProps.value,
-    };
 
-    usersDispatch({ type: "ADD_USER", user: user });
-    alert("Added user");
+  function isValidInputs(): boolean {
+    const isUserNameValid = userNameProps.validateInput(userNameProps.value);
+    const isDobValid = dobProps.validateInput(dobProps.value);
+    console.log(genderProps.value);
+    const isGenderValid = genderProps.validateInput(
+      convertStringToGender(genderProps.value)
+    );
+    const isEmailValid = emailProps.validateInput(emailProps.value);
+    const isAddressValid = addressProps.validateInput(addressProps.value);
+    const isTelephoneValid = telephoneProps.validateInput(telephoneProps.value);
+    const isWebsiteValid = websiteProps.validateInput(websiteProps.value);
+    return (
+      isUserNameValid &&
+      isDobValid &&
+      isGenderValid &&
+      isEmailValid &&
+      isAddressValid &&
+      isTelephoneValid &&
+      isWebsiteValid
+    );
+  }
+
+  function handleSubmitNewUser() {
+    if (isValidInputs()) {
+      const user: User = {
+        id: Math.random(),
+        name: userNameProps.value,
+        dob: dobProps.value,
+        gender: convertStringToGender(genderProps.value),
+        email: emailProps.value,
+        address: addressProps.value,
+        phone: telephoneProps.value,
+        web: websiteProps.value,
+      };
+      usersDispatch({ type: "ADD_USER", user: user });
+      alert("Added user");
+    } else {
+      alert("Bitte Informationen ergänzen");
+    }
   }
 
   return (
@@ -63,6 +89,7 @@ function CreateView() {
         <DateInput
           value={dobProps.value}
           onChange={dobProps.handleInputChangeEvent}
+          error={dobProps.error}
         />
       </div>
       <div className="input-container">
@@ -70,7 +97,8 @@ function CreateView() {
         <SelectInput
           value={genderProps.value}
           onChange={genderProps.handleInputChangeEvent}
-          options={["Männlich", "Weiblich", "Divers"]}
+          options={["", "Männlich", "Weiblich", "Divers"]}
+          error={genderProps.error}
         />
       </div>
       <div className="input-container">

@@ -15,6 +15,11 @@ export function useFormInput(value: string, required = false) {
     const inputValue = event.target.value;
     setInputValue(inputValue);
 
+    validateInput(inputValue);
+  }
+
+  function validateInput(inputValue: string): boolean {
+    console.log(inputValue);
     if (required) {
       if (inputValue === "") {
         // Setze einen Fehler
@@ -22,16 +27,20 @@ export function useFormInput(value: string, required = false) {
           isError: true,
           errorMessage: "Bittegeben Sie einen Wert ein",
         });
+        return false;
       } else {
         // Resette Fehler
         setError({ isError: false, errorMessage: "" });
+        return true;
       }
     }
+    return true;
   }
 
   return {
     value: inputValue,
     handleInputChangeEvent,
     error: error,
+    validateInput: validateInput,
   };
 }
