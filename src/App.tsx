@@ -7,6 +7,7 @@ import EditView from "./routes/edit/EditView";
 import { useReducer } from "react";
 import userManagementReducer from "./Hooks/userManagementReducer";
 import { UserContext } from "./context/UserContext";
+import type { User } from "./types/User";
 
 const router = createBrowserRouter([
   {
@@ -21,8 +22,20 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [users, usersDispatch] = useReducer(userManagementReducer, []);
-  console.log(users);
+  const [users, usersDispatch] = useReducer(
+    userManagementReducer,
+    [],
+    fetchInitUserData
+  );
+
+  function fetchInitUserData(): User[] {
+    const stringUsers = localStorage.getItem("users");
+    if (stringUsers) {
+      return JSON.parse(stringUsers);
+    }
+    return [];
+  }
+
   return (
     <UserContext.Provider value={{ users, usersDispatch }}>
       <RouterProvider router={router} />;

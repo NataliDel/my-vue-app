@@ -25,7 +25,7 @@ export function useFormInput(value: string, required = false) {
         // Setze einen Fehler
         setError({
           isError: true,
-          errorMessage: "Bittegeben Sie einen Wert ein",
+          errorMessage: "Bitte geben Sie einen Wert ein",
         });
         return false;
       } else {

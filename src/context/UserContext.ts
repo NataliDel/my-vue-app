@@ -5,8 +5,8 @@ import type {
 } from "../Hooks/userManagementReducer";
 
 export const UserContext = createContext<{
-  user: UserManagementState;
-  usersDispatch: UserManagementAction;
+  users: UserManagementState;
+  usersDispatch: React.Dispatch<UserManagementAction>;
 }>({
   users: [],
   usersDispatch: () => {},
