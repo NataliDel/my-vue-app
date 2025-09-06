@@ -23,9 +23,10 @@ export default function userManagementReducer(
       break;
     }
     case "UPDATE_USER": {
-      updatedState = prevState.map((user) =>
-        user.id === action.user.id ? action.user : user
-      );
+      updatedState = prevState.map((user) => {
+        console.log(user, action);
+        return user.id === action.user.id ? action.user : user;
+      });
       break;
     }
     default: {
