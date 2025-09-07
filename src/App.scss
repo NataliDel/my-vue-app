@@ -1,6 +1,13 @@
+@import "./variables";
+
 #root {
   display: flex;
   width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: $font-color;
 }
 
 :root {
@@ -9,7 +16,7 @@
   font-weight: 400;
 
   background-color: rgba(255, 255, 255, 0.87);
-  color: #242424;
+  color: $font-color;
 }
 
 body {
@@ -26,6 +33,7 @@ body {
 .app-sidebar {
   width: 360px;
 }
+
 .app-content {
   flex-grow: 1;
   padding: 1rem;

@@ -11,7 +11,7 @@ function Sidebar() {
         <Link to={"overview"}>
           <button className="sidebar-item">Übersicht</button>
         </Link>
-        <Link to={"overview"}>
+        <Link to={"create"}>
           <button className="sidebar-item">Erstellen</button>
         </Link>
       </div>
